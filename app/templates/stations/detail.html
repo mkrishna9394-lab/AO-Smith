@@ -1,0 +1,40 @@
+{% extends 'base/layout.html' %}
+{% block content %}
+<section class="page-wrap">
+    <div class="section-title-row">
+        <h1>{{ station.station_name }} - Today</h1>
+        <a class="primary-btn" href="{{ url_for('reports.index') }}">More Reports</a>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-box green"><span>Completed Batches</span><strong>{{ completed_batches }}</strong></div>
+        <div class="stat-box peach"><span>Total Delay</span><strong>{{ total_delay }} min</strong></div>
+        <div class="stat-box dark"><span>Cycle Time Set</span><strong>{{ station.cycle_time_set }} sec</strong></div>
+        <div class="stat-box green"><span>Target Batches</span><strong>{{ station.target_batches }}</strong></div>
+    </div>
+
+    <div class="list-card">
+        <h3>Delay Reason Breakdown</h3>
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>Reason</th>
+                    <th>No. of Delays</th>
+                    <th>Total Delay (mins)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in delay_rows %}
+                <tr>
+                    <td>{{ row.reason_name }}</td>
+                    <td>{{ row.delay_count }}</td>
+                    <td>{{ row.delay_minutes or 0 }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="3">No delay data available for today.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

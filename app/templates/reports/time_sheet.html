@@ -1,0 +1,23 @@
+{% extends 'base/layout.html' %}
+{% block content %}
+<section class="page-wrap narrow">
+    <div class="panel-card peach-head">
+        <h1>Available Time Split up</h1>
+        <p>General Shift Timings [9 AM to 5:30 PM]</p>
+    </div>
+    <div class="time-sheet-grid">
+        {% for label in ['Shift Available Time', 'Lunch Time', 'Breakfast Time', 'Coffee Break - Morning', 'Coffee Break - Evening', 'Meeting', 'TPM', '5S'] %}
+        <div class="time-sheet-row">
+            <span>{{ label }}</span>
+            <strong>0</strong>
+            <span>Mins</span>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="bottom-highlight">
+        <span>Net Available Time</span>
+        <strong>0.00 Hrs</strong>
+        <strong>0.00 Mins</strong>
+    </div>
+</section>
+{% endblock %}
