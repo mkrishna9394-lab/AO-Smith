@@ -1,0 +1,40 @@
+{% extends 'base/layout.html' %}
+{% block content %}
+<section class="page-wrap narrow">
+    <div class="panel-card green-head">
+        <h1>TODAY'S PLAN</h1>
+    </div>
+    <div class="list-card">
+        <table class="report-table plan-table">
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Planned Qty</th>
+                    <th>Achieved Qty</th>
+                    <th>Productivity %</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for _ in range(5) %}
+                <tr>
+                    <td>-</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="bottom-highlight">
+        <span>Productivity</span>
+        <strong>0.00 %</strong>
+    </div>
+</section>
+{% endblock %}

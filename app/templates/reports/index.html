@@ -1,0 +1,50 @@
+{% extends 'base/layout.html' %}
+{% block content %}
+<section class="page-wrap">
+    <div class="report-header-card">
+        <h1>Station Wise Report</h1>
+        <p>Check today's production, delay count, delay reasons, and total delay minutes for any station.</p>
+    </div>
+
+    <div class="filter-bar">
+        <div>
+            <label>Station Code</label>
+            <input id="station_code" value="ST10" placeholder="ST10">
+        </div>
+        <div>
+            <label>Date</label>
+            <input id="report_date" type="date">
+        </div>
+        <div class="filter-action">
+            <button class="primary-btn" onclick="loadStationReport()">Load Report</button>
+        </div>
+    </div>
+
+    <div class="stats-grid" id="report_summary">
+        <div class="stat-box green"><span>Completed Batches</span><strong id="completed_batches">0</strong></div>
+        <div class="stat-box peach"><span>Delay Events</span><strong id="delay_count">0</strong></div>
+        <div class="stat-box dark"><span>Total Delay</span><strong id="delay_minutes">0 min</strong></div>
+        <div class="stat-box green"><span>Station</span><strong id="station_name">-</strong></div>
+    </div>
+
+    <div class="list-card">
+        <h3>Reason-wise Delay</h3>
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>Reason</th>
+                    <th>Count</th>
+                    <th>Minutes</th>
+                </tr>
+            </thead>
+            <tbody id="reason_tbody"></tbody>
+        </table>
+    </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('report_date').value = new Date().toISOString().split('T')[0];
+    loadStationReport();
+});
+</script>
+{% endblock %}

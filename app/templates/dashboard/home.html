@@ -1,0 +1,35 @@
+{% extends 'base/layout.html' %}
+{% block content %}
+<section class="page-wrap">
+    <div class="section-title-row">
+        <h1>LINE 1</h1>
+        <a class="primary-btn" href="{{ url_for('reports.index') }}">Open Reports</a>
+    </div>
+
+    <div class="station-grid">
+        {% for station, completed_batches, delay_count in stations %}
+        <a class="station-card" href="{{ url_for('stations.detail', station_code=station.station_code) }}">
+            <div class="station-card-head">{{ station.station_name }}</div>
+            <div class="station-card-body">
+                <div class="metric-row split">
+                    <div><span class="metric-label">Completed</span><strong>{{ completed_batches }}</strong></div>
+                    <div><span class="metric-label">Pending</span><strong>{{ station.target_batches - completed_batches if station.target_batches > completed_batches else 0 }}</strong></div>
+                </div>
+                <div class="metric-row split compact">
+                    <div><span class="metric-label">Cycle Time Set</span><strong>{{ station.cycle_time_set }} sec</strong></div>
+                    <div><span class="metric-label">Delay Events</span><strong>{{ delay_count }}</strong></div>
+                </div>
+                <div class="table-mini-header">
+                    <span>Process Summary</span>
+                    <span>Value</span>
+                </div>
+                <div class="mini-line"><span>Today's Target</span><span>{{ station.target_batches }}</span></div>
+                <div class="mini-line"><span>Batches Produced</span><span>{{ completed_batches }}</span></div>
+                <div class="mini-line"><span>Delay Count</span><span>{{ delay_count }}</span></div>
+                <div class="mini-line"><span>Station Code</span><span>{{ station.station_code }}</span></div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
